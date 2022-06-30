@@ -1,2 +1,2 @@
 start:
-	npm start
+	npm build

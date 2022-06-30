@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@hexlet/chat-server": "^1.1.2"
+  },
+  "name": "@hexlet/code",
+  "description": "[![Actions Status](https://github.com/Boristhblade/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/Boristhblade/frontend-project-lvl4/actions)",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Boristhblade/frontend-project-lvl4.git"
+  },
+  "keywords": [
+    "react",
+    "js"
+  ],
+  "author": "Boris the Blade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Boristhblade/frontend-project-lvl4/issues"
+  },
+  "homepage": "https://github.com/Boristhblade/frontend-project-lvl4#readme"
+}

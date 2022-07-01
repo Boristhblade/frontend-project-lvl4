@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-function Login(props) {
+function Login() {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">

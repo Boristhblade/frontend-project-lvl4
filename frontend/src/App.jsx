@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from 'react-router-dom';
 import './App.css';
 import Forbidden from './components/404.jsx';
@@ -13,15 +12,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <Chat />
-        </Route>
-        <Route path="*">
-          <Forbidden />
-        </Route>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/" element={<div />} />
+        <Route path="*" element={<Forbidden />} />
       </Routes>
     </Router>
   );

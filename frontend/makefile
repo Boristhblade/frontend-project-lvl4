@@ -1,3 +1,3 @@
 start:
-	npm ci --production
+	npm ci
 	npm run build

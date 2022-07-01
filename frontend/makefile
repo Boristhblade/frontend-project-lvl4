@@ -1,3 +1,3 @@
 start:
-	npx ci
+	npm ci --production
 	npm run build

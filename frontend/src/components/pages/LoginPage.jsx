@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LoginForm from '../LoginForm.jsx';
 import logoImage from '../../images/loginPageLogo.jpg';
 
 function LoginPage() {
-  const [state, setState] = useState();
   return (
     <>
       <div className="d-flex flex-column h-100">

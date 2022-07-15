@@ -4,9 +4,12 @@ import {
   BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom';
 import './App.css';
+import { Provider } from 'react-redux';
 import Forbidden from './components/pages/404.jsx';
+import MainPage from './components/pages/MainPage.jsx';
 import LoginPage from './components/pages/LoginPage.jsx';
 import AuthContext from './context/AuthContext.jsx';
+import store from './slices/index.js';
 
 function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,15 +28,17 @@ function AuthProvider({ children }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/" element={<div />} />
-          <Route path="*" element={<Forbidden />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route exact path="/login" element={<LoginPage />} />
+            <Route exact path="/" element={<MainPage />} />
+            <Route path="*" element={<Forbidden />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </Provider>
   );
 }
 

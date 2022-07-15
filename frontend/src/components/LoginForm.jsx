@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Form, Button,
 } from 'react-bootstrap';
@@ -6,10 +6,12 @@ import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import { string, object } from 'yup';
 import axios from 'axios';
-// import authContext from '../context/AuthContext.jsx';
+import useAuth from '../hooks/useAuth.jsx';
 // import cn from 'classnames';
 
 function LoginForm() {
+  const [loginError, setLoginError] = useState('');
+  const auth = useAuth();
   const inputRef = useRef(null);
   const navigate = useNavigate();
   // const auth = useContext(authContext);
@@ -25,19 +27,24 @@ function LoginForm() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: (values) => {
+      setLoginError(null);
       axios.post('/api/v1/login', values)
         .then(({ data }) => {
           localStorage.setItem('userId', JSON.stringify(data));
+          auth.logIn();
           navigate('/');
         })
         .catch((err) => {
           if (err.isAxiosError && err.response.status === 401) {
-            formik.errors.username = 'User does not exist';
+            setLoginError('User does not exit or incorrect password');
           }
           throw err;
         });
     },
   });
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <Form className="col-12 col-md-6 mt-3 mt-mb-0" noValidate onSubmit={formik.handleSubmit}>
       <h1 className="text-center mb-4">Войти</h1>
@@ -47,12 +54,12 @@ function LoginForm() {
           placeholder="Ваш ник"
           onChange={formik.handleChange}
           value={formik.values.username}
-          isInvalid={!!formik.errors.username}
+          isInvalid={!!formik.errors.username || !!loginError}
           ref={inputRef}
         />
         <Form.Label className="form-label">Ваш ник</Form.Label>
         <Form.Control.Feedback type="invalid">
-          {formik.errors.username}
+          {formik.errors.username || loginError}
         </Form.Control.Feedback>
       </Form.Group>
 

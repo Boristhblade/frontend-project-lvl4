@@ -12,7 +12,7 @@ function Forbidden() {
         <p className="lead">
           The page you’re looking for doesn’t exist.
         </p>
-        <a href="index.html" className="btn btn-primary">Go Home</a>
+        <a href="/" className="btn btn-primary">Go Home</a>
       </div>
     </div>
   );

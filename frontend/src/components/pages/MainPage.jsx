@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth.jsx';
 import getAuthHeader from '../../utils.js';
 import { addChannels } from '../../slices/channelsSlice.js';
 import { addMessages } from '../../slices/messagesSlice.js';
+import { setChannel } from '../../slices/currentChannelSlice.js';
 import ChatWindow from '../ChatWindow.jsx';
 
 function MainPage() {
@@ -23,6 +24,7 @@ function MainPage() {
     axios.get('/api/v1/data', { headers: header })
       .then(({ data }) => {
         batch(() => {
+          dispatch(setChannel({ id: data.currentChannelId }));
           dispatch(addChannels(data.channels));
           dispatch(addMessages(data.messages));
         });

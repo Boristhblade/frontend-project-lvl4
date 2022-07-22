@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import useAuth from '../../hooks/useAuth.jsx';
+import useSocket from '../../hooks/useSocket.jsx';
 
 export default function MessageForm() {
+  const socket = useSocket();
+  const inputRef = useRef(null);
+  const { username } = useAuth();
+  const channelId = useSelector((state) => state.currentChannel.currentChannel);
+  console.log(channelId);
+  useEffect(() => {
+    inputRef.current.focus();
+  });
   const formik = useFormik({
     initialValues: {
       body: '',
     },
     onSubmit: (values) => {
-      console.log(values);
+      socket({ username, channelId, body: values.body });
+      formik.resetForm();
     },
   });
   return (
@@ -22,6 +34,7 @@ export default function MessageForm() {
             className="border-0 p-0 ps-2 form-control"
             value={formik.values.body}
             onChange={formik.handleChange}
+            ref={inputRef}
           />
           <Button type="submit" disabled={!formik.values.body} className="btn btn-group-vertical" variant="light">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">

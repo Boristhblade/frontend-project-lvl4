@@ -6,16 +6,21 @@ import MessagesHeader from './MessagesHeader.jsx';
 
 export default function Messages() {
   const messages = useSelector((state) => state.messages);
-  const activeChannelId = useSelector((state) => state.currentChannel.currentChannel);
+  const activeChannelId = useSelector((state) => {
+    console.log(state);
+    return state.currentChannel;
+  });
+  console.log(activeChannelId);
   const filteredMessages = messages.ids
     .filter((id) => messages.entities[id].channelId === activeChannelId);
   const channels = useSelector((state) => state.channels);
   const currentChannel = channels.entities[activeChannelId];
+  console.log(currentChannel);
 
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">
-        <MessagesHeader name={currentChannel.name} number={filteredMessages.length} />
+        {/* <MessagesHeader name={currentChannel.name} number={filteredMessages.length} /> */}
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {filteredMessages
             .map((id) => (

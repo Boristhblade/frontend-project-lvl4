@@ -23,8 +23,6 @@ function MainPage() {
     auth.logIn();
     axios.get('/api/v1/data', { headers: header })
       .then(({ data }) => {
-        console.log('DADDTAAAAAAAAAAAAAAAAAAAAAAA');
-        console.log(data);
         batch(() => {
           dispatch(setChannel({ id: data.currentChannelId }));
           dispatch(addChannels(data.channels));

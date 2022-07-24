@@ -19,6 +19,10 @@ export default function MessagesHeader({ name, number }) {
 }
 
 MessagesHeader.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   number: PropTypes.number.isRequired,
+};
+
+MessagesHeader.defaultProps = {
+  name: 'default',
 };

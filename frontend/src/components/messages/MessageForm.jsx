@@ -10,7 +10,6 @@ export default function MessageForm() {
   const inputRef = useRef(null);
   const { username } = useAuth();
   const channelId = useSelector((state) => state.currentChannel.currentChannel);
-  console.log(channelId);
   useEffect(() => {
     inputRef.current.focus();
   });

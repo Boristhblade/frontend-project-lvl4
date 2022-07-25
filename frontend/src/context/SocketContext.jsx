@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
-import sendMessage from '../sockets/index.js';
+import { sendMessage } from '../sockets/index.js';
 
 const SocketContext = createContext({});
 

@@ -4,7 +4,8 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -14,7 +15,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "airbnb"
     ],
     "rules": {
         "import/extensions": ["error", "always", {"ignorePackages": true} ]

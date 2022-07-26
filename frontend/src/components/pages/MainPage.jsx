@@ -12,13 +12,13 @@ import { setChannel } from '../../slices/currentChannelSlice.js';
 import ChatWindow from '../ChatWindow.jsx';
 import getModal from '../modals/index.js';
 
-const renderModal = ({ modalInfo, hideModal, setItems }) => {
+const renderModal = ({ modalInfo, hideModal }) => {
   if (!modalInfo.type) {
     return null;
   }
 
   const Component = getModal(modalInfo.type);
-  return <Component modalInfo={modalInfo} setItems={setItems} onHide={hideModal} />;
+  return <Component modalInfo={modalInfo} onHide={hideModal} />;
 };
 
 function MainPage() {
@@ -58,8 +58,8 @@ function MainPage() {
               </div>
             </nav>
             <div className="container h-100 my-4 overflow-hidden rounded shadow">
-              <ModalProvider value={showModal}>
-                <ChatWindow props={setModalInfo} />
+              <ModalProvider handler={showModal}>
+                <ChatWindow />
               </ModalProvider>
             </div>
           </div>

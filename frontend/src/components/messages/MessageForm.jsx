@@ -18,7 +18,7 @@ export default function MessageForm() {
       body: '',
     },
     onSubmit: (values) => {
-      socket({ username, channelId, body: values.body });
+      socket.sendMessage({ username, channelId, body: values.body });
       formik.resetForm();
     },
   });

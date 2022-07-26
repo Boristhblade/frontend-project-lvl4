@@ -6,14 +6,15 @@ import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import { string, object } from 'yup';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth.jsx';
-// import cn from 'classnames';
 
 function LoginForm() {
   const [loginError, setLoginError] = useState('');
   const auth = useAuth();
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   // const auth = useContext(authContext);
   const formik = useFormik({
     initialValues: {
@@ -21,8 +22,13 @@ function LoginForm() {
       password: '',
     },
     validationSchema: object().shape({
-      username: string().required('Name is a required field').min(4, 'Must be at least 4 symbols'),
-      password: string().required('Password is a required field').min(5, 'Must be at least 5 symbols'),
+      username: string()
+        .required(t('signup.required'))
+        .min(3, t('signup.usernameConstraints'))
+        .max(20, t('signup.usernameConstraints')),
+      password: string()
+        .required(t('signup.required'))
+        .min(5, t('signup.passMin')),
     }),
     validateOnBlur: false,
     validateOnChange: false,
@@ -36,7 +42,7 @@ function LoginForm() {
         })
         .catch((err) => {
           if (err.isAxiosError && err.response.status === 401) {
-            setLoginError('User does not exit or incorrect password');
+            setLoginError(t('login.authFailed'));
           }
           throw err;
         });
@@ -47,17 +53,17 @@ function LoginForm() {
   }, []);
   return (
     <Form className="col-12 col-md-6 mt-3 mt-mb-0" noValidate onSubmit={formik.handleSubmit}>
-      <h1 className="text-center mb-4">Войти</h1>
+      <h1 className="text-center mb-4">{t('login.header')}</h1>
       <Form.Group className="form-floating mb-3" controlId="username">
         <Form.Control
           type="name"
-          placeholder="Ваш ник"
+          placeholder={t('login.username')}
           onChange={formik.handleChange}
           value={formik.values.username}
           isInvalid={!!formik.errors.username || !!loginError}
           ref={inputRef}
         />
-        <Form.Label className="form-label">Ваш ник</Form.Label>
+        <Form.Label className="form-label">{t('login.username')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {formik.errors.username || loginError}
         </Form.Control.Feedback>
@@ -66,19 +72,19 @@ function LoginForm() {
       <Form.Group className="form-floating mb-3" controlId="password">
         <Form.Control
           type="password"
-          placeholder="Пароль"
+          placeholder={t('login.password')}
           onChange={formik.handleChange}
           value={formik.values.password}
           isInvalid={!!formik.errors.password}
         />
-        <Form.Label className="form-label">Пароль</Form.Label>
+        <Form.Label className="form-label">{t('login.password')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {formik.errors.password}
         </Form.Control.Feedback>
       </Form.Group>
       <div className="d-grid gap-2">
         <Button variant="outline-primary" type="submit">
-          Log in
+          {t('login.submit')}
         </Button>
       </div>
     </Form>

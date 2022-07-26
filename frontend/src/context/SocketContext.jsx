@@ -1,12 +1,13 @@
-import React, { createContext } from 'react';
+import React, { createContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { sendMessage } from '../sockets/index.js';
+import { sendMessage, createChannel } from '../sockets/index.js';
 
 const SocketContext = createContext({});
 
 export default function SocketProvider({ children }) {
+  const memoizedValue = useMemo(() => ({ sendMessage, createChannel }));
   return (
-    <SocketContext.Provider value={sendMessage}>
+    <SocketContext.Provider value={memoizedValue}>
       {children}
     </SocketContext.Provider>
   );

@@ -1,17 +1,11 @@
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createChannel } from '../../sockets/index.js';
 
-const generateOnSubmit = ({ setItems, onHide }) => (values) => {
-  const item = { id: _.uniqueId(), body: values.body };
-  setItems((items) => {
-    items.push(item);
-  });
-  onHide();
-};
-
 function AddChannel(props) {
+  const { t } = useTranslation();
   const { onHide } = props;
   const f = useFormik({
     onSubmit: createChannel(),
@@ -25,7 +19,9 @@ function AddChannel(props) {
   return (
     <Modal show>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Add</Modal.Title>
+        <Modal.Title>
+          {t('channel.add')}
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

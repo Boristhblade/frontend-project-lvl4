@@ -1,5 +1,5 @@
 import React from 'react';
-import i18next from 'i18next';
+import  { createInstance } from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 
@@ -14,7 +14,7 @@ const rollbarConfig = {
 };
 
 const init = async () => {
-  const i18n = i18next.createInstance();
+  const i18n = createInstance();
   await i18n
     .use(initReactI18next)
     .init({

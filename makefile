@@ -8,3 +8,8 @@ start:
 	make start-backend & make start-frontend
 start-locally:
 	make start-backend-locally & make start-frontend
+build:
+	make -C app build
+install:
+	npm ci
+	make -C app install

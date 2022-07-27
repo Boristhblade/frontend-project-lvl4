@@ -3,22 +3,28 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { createChannel } from '../../sockets/index.js';
+import { toast } from 'react-toastify';
+import { renameChannel } from '../../sockets/index.js';
 
-function AddChannel(props) {
+function RenameChannel(props) {
   const channels = useSelector((state) => state.channels);
   const names = Object.values(channels.entities).map((item) => item.name);
   const { t } = useTranslation();
-  const { onHide } = props;
+  const notify = () => toast.success(t('channel.renamed'));
+  const { onHide, id } = props;
   const f = useFormik({
-    initialValues: { name: '' },
+    initialValues: {
+      name: '',
+      id,
+    },
     onSubmit: (values) => {
-      createChannel(values, t('channel.created'));
+      renameChannel(values);
       onHide();
+      notify();
     },
     validationSchema: Yup.object().shape({
       name: Yup
@@ -41,12 +47,12 @@ function AddChannel(props) {
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>
-          {t('channel.add')}
+          {t('modal.rename')}
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <form onSubmit={f.handleSubmit} noValidate>
+        <form onSubmit={f.handleSubmit}>
           <FormGroup>
             <FormControl
               required
@@ -81,8 +87,9 @@ function AddChannel(props) {
   );
 }
 
-AddChannel.propTypes = {
+RenameChannel.propTypes = {
   onHide: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
-export default AddChannel;
+export default RenameChannel;

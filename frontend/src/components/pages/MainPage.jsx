@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, batch } from 'react-redux';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth.jsx';
 import getAuthHeader from '../../utils.js';
 import ModalProvider from '../../context/ModalContext.jsx';
@@ -10,6 +10,7 @@ import { addChannels } from '../../slices/channelsSlice.js';
 import { addMessages } from '../../slices/messagesSlice.js';
 import { setChannel } from '../../slices/currentChannelSlice.js';
 import ChatWindow from '../ChatWindow.jsx';
+import Navbar from '../Navbar.jsx';
 import getModal from '../modals/index.js';
 
 const renderModal = ({ modalInfo, hideModal }) => {
@@ -18,17 +19,16 @@ const renderModal = ({ modalInfo, hideModal }) => {
   }
 
   const Component = getModal(modalInfo.type);
-  return <Component modalInfo={modalInfo} onHide={hideModal} />;
+  return <Component type={modalInfo.type} id={modalInfo.id} onHide={hideModal} />;
 };
 
 function MainPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [modalInfo, setModalInfo] = useState({ type: null, item: null });
+  const [modalInfo, setModalInfo] = useState({ type: null, id: null });
   const hideModal = () => setModalInfo({ type: null, item: null });
-  const showModal = (type, item = null) => setModalInfo({ type, item });
-  const { t } = useTranslation();
+  const showModal = (type, id = null) => setModalInfo({ type, id });
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userId'));
     const header = getAuthHeader();
@@ -51,19 +51,14 @@ function MainPage() {
       <div className="h-100">
         <div className="h-100" id="chat">
           <div className="d-flex flex-column h-100">
-            <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-              <div className="container">
-                <a className="navbar-brand" href="/">Hexlet Chat</a>
-                <button type="button" className="btn btn-primary" onClick={auth.logOut}>{t('logout')}</button>
-              </div>
-            </nav>
+            <Navbar />
             <div className="container h-100 my-4 overflow-hidden rounded shadow">
               <ModalProvider handler={showModal}>
                 <ChatWindow />
               </ModalProvider>
             </div>
           </div>
-          <div className="Toastify" />
+          <ToastContainer />
         </div>
       </div>
       {renderModal({ modalInfo, hideModal })}

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import Forbidden from './components/pages/404.jsx';
 import MainPage from './components/pages/MainPage.jsx';
 import LoginPage from './components/pages/LoginPage.jsx';
+import SignupPage from './components/pages/SignupPage.jsx';
 import AuthContext from './context/AuthContext.jsx';
 import store from './slices/index.js';
 import SocketProvider from './context/SocketContext.jsx';
@@ -38,6 +39,7 @@ function App() {
           <Router>
             <Routes>
               <Route exact path="/login" element={<LoginPage />} />
+              <Route exact path="/signup" element={<SignupPage />} />
               <Route exact path="/" element={<MainPage />} />
               <Route path="*" element={<Forbidden />} />
             </Routes>

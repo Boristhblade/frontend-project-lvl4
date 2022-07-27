@@ -9,6 +9,7 @@ const ru = {
     },
     channel: {
       add: 'Создать канал',
+      renameHeader: 'Переименовать канал',
       remove: 'Удалить',
       rename: 'Переименовать',
       name: 'Имя канала',
@@ -28,6 +29,7 @@ const ru = {
       header: 'Войти',
     },
     logout: 'Выйти',
+    chat: 'Hexlet chat',
     signup: {
       required: 'Обязательное поле',
       passMin: 'Не менее 5 символов',
@@ -55,9 +57,9 @@ const ru = {
       name: 'Название канала',
       rename: 'Переименовать канал',
       cancel: 'Отменить',
-      add: 'Добавить',
+      submit: 'Отправить',
       remove: 'Удалить канал',
-      sure: 'Уверены',
+      sure: 'Уверены ?',
     },
     message: {
       new: 'Новое сообщение',

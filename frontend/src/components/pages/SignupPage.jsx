@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import LoginForm from '../LoginForm.jsx';
+import SignupForm from '../SignupForm.jsx';
 import logoImage from '../../images/loginPageLogo.jpg';
 import Navbar from '../Navbar.jsx';
 
-function LoginPage() {
+function SignupPage() {
   const { t } = useTranslation();
   return (
     <>
@@ -18,15 +18,7 @@ function LoginPage() {
                   <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                     <img src={logoImage} className="rounded-circle" alt={t('login.header')} />
                   </div>
-                  <LoginForm />
-                </div>
-                <div className="card-footer p-4">
-                  <div className="text-center">
-                    <span>
-                      {t('login.newToChat') }
-                    </span>
-                    <a href="/signup">{t('login.signup')}</a>
-                  </div>
+                  <SignupForm />
                 </div>
               </div>
             </div>
@@ -38,4 +30,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignupPage;

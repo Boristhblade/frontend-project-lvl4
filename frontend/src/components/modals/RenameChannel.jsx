@@ -14,7 +14,8 @@ function RenameChannel(props) {
   const channels = useSelector((state) => state.channels);
   const names = Object.values(channels.entities).map((item) => item.name);
   const { t } = useTranslation();
-  const notify = () => toast.success(t('channel.renamed'));
+  const notifySuccess = () => toast.success(t('channel.renamed'));
+  const notifyError = () => toast.error(t('channel.error'));
   const { onHide, id } = props;
   const f = useFormik({
     initialValues: {
@@ -22,9 +23,8 @@ function RenameChannel(props) {
       id,
     },
     onSubmit: (values) => {
-      renameChannel(values);
+      renameChannel(values, notifySuccess, notifyError);
       onHide();
-      notify();
     },
     validationSchema: Yup.object().shape({
       name: Yup

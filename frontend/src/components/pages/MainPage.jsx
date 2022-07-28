@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, batch } from 'react-redux';
 import axios from 'axios';
-import { ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 import useAuth from '../../hooks/useAuth.jsx';
 import getAuthHeader from '../../utils.js';
 import ModalProvider from '../../context/ModalContext.jsx';

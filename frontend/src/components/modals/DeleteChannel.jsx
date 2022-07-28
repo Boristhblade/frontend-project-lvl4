@@ -4,13 +4,17 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { deleteChannel } from '../../sockets/index.js';
 
 function DeleteChannel(props) {
   const { t } = useTranslation();
+  const notifySuccess = () => toast.success(t('channel.removed'));
+  const notifyError = () => toast.error(t('channel.error'));
   const { onHide, id } = props;
   const handleSubmit = () => {
-    deleteChannel(id, t('channel.removed'));
+    deleteChannel(id, notifySuccess, notifyError);
+    onHide();
   };
   return (
     <Modal show centered>

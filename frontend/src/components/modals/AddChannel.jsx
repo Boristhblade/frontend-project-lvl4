@@ -7,17 +7,20 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import { createChannel } from '../../sockets/index.js';
 
 function AddChannel(props) {
   const channels = useSelector((state) => state.channels);
   const names = Object.values(channels.entities).map((item) => item.name);
   const { t } = useTranslation();
+  const notifySuccess = () => toast.success(t('channel.created'));
+  const notifyError = () => toast.error(t('channel.error'));
   const { onHide } = props;
   const f = useFormik({
     initialValues: { name: '' },
     onSubmit: (values) => {
-      createChannel(values, t('channel.created'));
+      createChannel(values, notifySuccess, notifyError);
       onHide();
     },
     validationSchema: Yup.object().shape({

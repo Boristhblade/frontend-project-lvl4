@@ -36,26 +36,32 @@ const sendMessage = (data) => {
   });
 };
 
-const createChannel = (data) => {
+const createChannel = (data, successCb, errCb) => {
   socket.emit('newChannel', data, (response) => {
     if (!response.status) {
-      createChannel(data);
+      errCb();
+    } else {
+      successCb();
     }
   });
 };
 
-const renameChannel = (data) => {
+const renameChannel = (data, successCb, errCb) => {
   socket.emit('renameChannel', data, (response) => {
     if (!response.status) {
-      renameChannel(data);
+      errCb();
+    } else {
+      successCb();
     }
   });
 };
 
-const deleteChannel = (data) => {
+const deleteChannel = (data, successCb, errCb) => {
   socket.emit('removeChannel', { id: data }, (response) => {
     if (!response.status) {
-      deleteChannel(data);
+      errCb();
+    } else {
+      successCb();
     }
   });
 };

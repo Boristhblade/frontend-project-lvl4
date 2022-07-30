@@ -8,10 +8,11 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { createChannel } from '../../sockets/index.js';
+import useSocket from '../../hooks/useSocket.jsx';
 
 function AddChannel(props) {
   const channels = useSelector((state) => state.channels);
+  const { createChannel } = useSocket();
   const names = Object.values(channels.entities).map((item) => item.name);
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('channel.created'));

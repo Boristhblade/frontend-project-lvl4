@@ -33,8 +33,8 @@ function AuthProvider({ children }) {
 
 function App() {
   return (
-    <SocketProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <SocketProvider>
         <AuthProvider>
           <Router>
             <Routes>
@@ -45,8 +45,8 @@ function App() {
             </Routes>
           </Router>
         </AuthProvider>
-      </Provider>
-    </SocketProvider>
+      </SocketProvider>
+    </Provider>
   );
 }
 

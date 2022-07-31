@@ -11,6 +11,7 @@ const SocketContext = createContext({});
 
 export default function SocketProvider({ children }) {
   const socket = io();
+  const { currentChannel } = useSelector((state) => state.currentChannel);
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
@@ -24,12 +25,9 @@ export default function SocketProvider({ children }) {
     store.dispatch(updateChannel({ id, changes }));
   });
 
-  socket.on('removeChannel', (payload) => {
-    console.log(payload);
-    store.dispatch(removeChannel(payload));
-    const { currentChannel } = useSelector((state) => state.currentChannel);
-    console.log(currentChannel);
-    if (payload.id === currentChannel) {
+  socket.on('removeChannel', ({ id }) => {
+    store.dispatch(removeChannel(id));
+    if (id === currentChannel) {
       store.dispatch(setChannel(1));
     }
   });

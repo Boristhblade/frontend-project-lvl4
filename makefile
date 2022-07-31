@@ -9,7 +9,7 @@ start:
 start-locally:
 	make start-backend-locally & make start-frontend
 build:
-	make -C app build
+	make -C frontend build
 install:
 	npm ci
-	make -C app install
+	make -C frontend install

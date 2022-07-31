@@ -11,7 +11,7 @@ export default function Channel({ name, id, removable }) {
   const openModal = useModal();
   const dispatch = useDispatch();
   const button = (
-    <Button variant="light" className="w-100 rounded-0 text-start btn">
+    <Button variant="light" className="w-100 rounded-0 text-start btn" onClick={() => dispatch(setChannel({ id }))}>
       <span className="me-1">#</span>
       {name}
     </Button>

@@ -48,7 +48,6 @@ export default function SocketProvider({ socket, children }) {
     socket.emit('newChannel', data, (response) => {
       const { status, data: { id } } = response;
       if (status === 'ok') {
-        console.log(typeof id);
         store.dispatch(setChannel({ id }));
         successCb();
       } else {

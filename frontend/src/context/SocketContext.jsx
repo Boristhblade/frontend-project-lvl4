@@ -5,12 +5,14 @@ import store from '../slices/index.js';
 import { addMessage } from '../slices/messagesSlice.js';
 import { addChannel, updateChannel, removeChannel } from '../slices/channelsSlice.js';
 import { setChannel } from '../slices/currentChannelSlice.js';
+import { useEffect } from 'react';
 
 const SocketContext = createContext({});
 
 export default function SocketProvider({ socket, children }) {
   const { currentChannel } = useSelector((state) => state.currentChannel);
-  socket.on('newMessage', (payload) => {
+  useEffect(() => {
+    socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
 
@@ -25,10 +27,14 @@ export default function SocketProvider({ socket, children }) {
 
   socket.on('removeChannel', ({ id }) => {
     store.dispatch(removeChannel(id));
+    console.log(currentChannel);
     if (id === currentChannel) {
+      console.log(currentChannel);
       store.dispatch(setChannel({ id: 1 }));
     }
   });
+  }, [socket, currentChannel]);
+  
 
   const sendMessage = (data) => {
     socket.emit('newMessage', data, (response) => {

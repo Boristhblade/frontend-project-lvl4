@@ -1,6 +1,5 @@
 import React, { createContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { io } from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import store from '../slices/index.js';
 import { addMessage } from '../slices/messagesSlice.js';
@@ -9,8 +8,7 @@ import { setChannel } from '../slices/currentChannelSlice.js';
 
 const SocketContext = createContext({});
 
-export default function SocketProvider({ children }) {
-  const socket = io();
+export default function SocketProvider({ socket, children }) {
   const { currentChannel } = useSelector((state) => state.currentChannel);
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
@@ -28,7 +26,7 @@ export default function SocketProvider({ children }) {
   socket.on('removeChannel', ({ id }) => {
     store.dispatch(removeChannel(id));
     if (id === currentChannel) {
-      store.dispatch(setChannel(1));
+      store.dispatch(setChannel({ id: 1 }));
     }
   });
 
@@ -42,30 +40,33 @@ export default function SocketProvider({ children }) {
 
   const createChannel = (data, successCb, errCb) => {
     socket.emit('newChannel', data, (response) => {
-      if (!response.status) {
-        errCb();
-      } else {
+      const { status, data: { id } } = response;
+      if (status === 'ok') {
+        console.log(typeof id);
+        store.dispatch(setChannel({ id }));
         successCb();
+      } else {
+        errCb();
       }
     });
   };
 
   const renameChannel = (data, successCb, errCb) => {
-    socket.emit('renameChannel', data, (response) => {
-      if (!response.status) {
-        errCb();
-      } else {
+    socket.emit('renameChannel', data, ({ status }) => {
+      if (status === 'ok') {
         successCb();
+      } else {
+        errCb();
       }
     });
   };
 
   const deleteChannel = (data, successCb, errCb) => {
-    socket.emit('removeChannel', data, (response) => {
-      if (!response.status) {
-        errCb();
-      } else {
+    socket.emit('removeChannel', data, ({ status }) => {
+      if (status === 'ok') {
         successCb();
+      } else {
+        errCb();
       }
     });
   };
@@ -84,3 +85,10 @@ SocketProvider.propTypes = {
 };
 
 export { SocketContext };
+
+SocketContext.propTypes = {
+  socket: PropTypes.shape({
+    on: PropTypes.func.isRequired,
+    emit: PropTypes.func.isRequired,
+  }).isRequired
+}

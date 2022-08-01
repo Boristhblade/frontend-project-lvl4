@@ -52,7 +52,7 @@ function AddChannel(props) {
       <Modal.Body>
         <form onSubmit={f.handleSubmit} noValidate>
           <FormGroup>
-            <FormLabel>{t('channel.name')}</FormLabel>
+            <FormLabel visuallyHidden="true">{t('channel.name')}</FormLabel>
             <FormControl
               required
               ref={inputRef}

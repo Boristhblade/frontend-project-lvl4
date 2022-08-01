@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { Provider } from 'react-redux';
+import io from 'socket.io-client';
 import Forbidden from './components/pages/404.jsx';
 import MainPage from './components/pages/MainPage.jsx';
 import LoginPage from './components/pages/LoginPage.jsx';
@@ -30,11 +31,12 @@ function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+const socket = io();
 
 function App() {
   return (
     <Provider store={store}>
-      <SocketProvider>
+      <SocketProvider socket={socket}>
         <AuthProvider>
           <Router>
             <Routes>

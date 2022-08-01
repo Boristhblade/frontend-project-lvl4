@@ -5,10 +5,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import useSocket from '../../hooks/useSocket.jsx';
+import useAPI from '../../hooks/useAPI.jsx';
 
 function DeleteChannel(props) {
-  const { deleteChannel } = useSocket();
+  const { deleteChannel } = useAPI();
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('channel.removed'));
   const notifyError = () => toast.error(t('channel.error'));

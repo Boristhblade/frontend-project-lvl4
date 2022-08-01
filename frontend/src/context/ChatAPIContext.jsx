@@ -7,32 +7,32 @@ import { addChannel, updateChannel, removeChannel } from '../slices/channelsSlic
 import { setChannel } from '../slices/currentChannelSlice.js';
 import { useEffect } from 'react';
 
-const SocketContext = createContext({});
+const ChatAPIContext = createContext({});
 
-export default function SocketProvider({ socket, children }) {
+export default function ChatAPIProvider({ socket, children }) {
   const { currentChannel } = useSelector((state) => state.currentChannel);
   useEffect(() => {
-    socket.on('newMessage', (payload) => {
-    store.dispatch(addMessage(payload));
-  });
+      socket.on('newMessage', (payload) => {
+      store.dispatch(addMessage(payload));
+    });
 
-  socket.on('newChannel', (payload) => {
-    store.dispatch(addChannel(payload));
-  });
+    socket.on('newChannel', (payload) => {
+      store.dispatch(addChannel(payload));
+    });
 
-  socket.on('renameChannel', (payload) => {
-    const { id, ...changes } = payload;
-    store.dispatch(updateChannel({ id, changes }));
-  });
+    socket.on('renameChannel', (payload) => {
+      const { id, ...changes } = payload;
+      store.dispatch(updateChannel({ id, changes }));
+    });
 
-  socket.on('removeChannel', ({ id }) => {
-    store.dispatch(removeChannel(id));
-    console.log(currentChannel);
-    if (id === currentChannel) {
+    socket.on('removeChannel', ({ id }) => {
+      store.dispatch(removeChannel(id));
       console.log(currentChannel);
-      store.dispatch(setChannel({ id: 1 }));
-    }
-  });
+      if (id === currentChannel) {
+        console.log(currentChannel);
+        store.dispatch(setChannel({ id: 1 }));
+      }
+    });
   }, [socket, currentChannel]);
   
 
@@ -79,21 +79,18 @@ export default function SocketProvider({ socket, children }) {
     sendMessage, createChannel, deleteChannel, renameChannel,
   }));
   return (
-    <SocketContext.Provider value={memoizedValue}>
+    <ChatAPIContext.Provider value={memoizedValue}>
       {children}
-    </SocketContext.Provider>
+    </ChatAPIContext.Provider>
   );
 }
 
-SocketProvider.propTypes = {
+ChatAPIProvider.propTypes = {
   children: PropTypes.element.isRequired,
-};
-
-export { SocketContext };
-
-SocketContext.propTypes = {
   socket: PropTypes.shape({
     on: PropTypes.func.isRequired,
     emit: PropTypes.func.isRequired,
   }).isRequired
-}
+};
+
+export { ChatAPIContext };

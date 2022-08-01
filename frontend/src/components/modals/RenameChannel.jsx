@@ -8,12 +8,12 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import useSocket from '../../hooks/useSocket.jsx';
+import useAPI from '../../hooks/useAPI.jsx';
 
 function RenameChannel(props) {
   const channels = useSelector((state) => state.channels);
   const names = Object.values(channels.entities).map((item) => item.name);
-  const { renameChannel } = useSocket();
+  const { renameChannel } = useAPI();
   const { t } = useTranslation();
   const notifySuccess = () => toast.success(t('channel.renamed'));
   const notifyError = () => toast.error(t('channel.error'));

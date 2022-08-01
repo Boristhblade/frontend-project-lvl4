@@ -28,7 +28,7 @@ function SignupForm() {
         .max(20, t('signup.usernameConstraints')),
       password: string()
         .required(t('signup.required'))
-        .min(5, t('signup.passMin')),
+        .min(6, t('signup.passMin')),
       confirm: string()
         .oneOf([ref('password'), null], t('signup.mustMatch')),
     }),

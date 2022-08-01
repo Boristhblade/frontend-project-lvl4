@@ -1,5 +1,5 @@
 import {
-  Modal, FormGroup, FormControl, Button,
+  Modal, FormGroup, FormControl, Button, FormLabel,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
@@ -52,6 +52,7 @@ function AddChannel(props) {
       <Modal.Body>
         <form onSubmit={f.handleSubmit} noValidate>
           <FormGroup>
+            <FormLabel>{t('channel.name')}</FormLabel>
             <FormControl
               required
               ref={inputRef}

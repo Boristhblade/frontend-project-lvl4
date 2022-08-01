@@ -66,7 +66,7 @@ function SignupForm() {
           isInvalid={!!formik.errors.username || !!loginError}
           ref={inputRef}
         />
-        <Form.Label className="form-label">{t('login.username')}</Form.Label>
+        <Form.Label className="form-label">{t('signup.username')}</Form.Label>
         <Form.Control.Feedback type="invalid">
           {formik.errors.username || loginError}
         </Form.Control.Feedback>

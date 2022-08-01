@@ -8,6 +8,7 @@
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build"
   },
+  "postinstall": "cd frontend && npm install",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Boristhblade/frontend-project-lvl4.git"

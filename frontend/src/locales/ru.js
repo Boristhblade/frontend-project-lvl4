@@ -21,7 +21,7 @@ const ru = {
       error: 'Ошибка! Попробуйте еще раз',
     },
     login: {
-      username: 'Ваш ник',
+      username: 'Имя пользователя',
       password: 'Пароль',
       submit: 'Войти',
       signup: 'Регистрация',

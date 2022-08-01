@@ -27,7 +27,6 @@ function LoginForm() {
         .max(20, t('signup.usernameConstraints')),
       password: string()
         .required(t('signup.required'))
-        .min(5, t('signup.passMin')),
     }),
     validateOnBlur: false,
     validateOnChange: false,

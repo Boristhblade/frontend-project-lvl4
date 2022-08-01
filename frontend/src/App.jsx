@@ -12,7 +12,7 @@ import LoginPage from './components/pages/LoginPage.jsx';
 import SignupPage from './components/pages/SignupPage.jsx';
 import AuthContext from './context/AuthContext.jsx';
 import store from './slices/index.js';
-import SocketProvider from './context/SocketContext.jsx';
+import ChatAPIProvider from './context/ChatAPIContext.jsx';
 
 function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,7 +36,7 @@ const socket = io();
 function App() {
   return (
     <Provider store={store}>
-      <SocketProvider socket={socket}>
+      <ChatAPIProvider socket={socket}>
         <AuthProvider>
           <Router>
             <Routes>
@@ -47,7 +47,7 @@ function App() {
             </Routes>
           </Router>
         </AuthProvider>
-      </SocketProvider>
+      </ChatAPIProvider>
     </Provider>
   );
 }

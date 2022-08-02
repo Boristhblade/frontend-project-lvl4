@@ -8,8 +8,10 @@ import { string, object, ref } from 'yup';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth.jsx';
+import routes from '../routes.js';
 
 function SignupForm() {
+  const signupPath = routes.signupPath();
   const [loginError, setLoginError] = useState('');
   const auth = useAuth();
   const inputRef = useRef(null);
@@ -37,7 +39,7 @@ function SignupForm() {
     onSubmit: (values) => {
       setLoginError(null);
       const userInfo = { username: values.username, password: values.password };
-      axios.post('/api/v1/signup', userInfo)
+      axios.post(signupPath, userInfo)
         .then(({ data }) => {
           localStorage.setItem('userId', JSON.stringify(data));
           auth.logIn();

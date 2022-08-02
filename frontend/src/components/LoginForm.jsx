@@ -8,8 +8,10 @@ import { string, object } from 'yup';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth.jsx';
+import routes from '../routes.js';
 
 function LoginForm() {
+  const loginPath = routes.loginPath();
   const [loginError, setLoginError] = useState('');
   const auth = useAuth();
   const inputRef = useRef(null);
@@ -32,7 +34,7 @@ function LoginForm() {
     validateOnChange: false,
     onSubmit: (values) => {
       setLoginError(null);
-      axios.post('/api/v1/login', values)
+      axios.post(loginPath, values)
         .then(({ data }) => {
           localStorage.setItem('userId', JSON.stringify(data));
           auth.logIn();

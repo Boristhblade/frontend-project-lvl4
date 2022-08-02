@@ -13,6 +13,7 @@ import SignupPage from './components/pages/SignupPage.jsx';
 import AuthContext from './context/AuthContext.jsx';
 import store from './slices/index.js';
 import ChatAPIProvider from './context/ChatAPIContext.jsx';
+import routes from './routes';
 
 function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -40,10 +41,10 @@ function App() {
         <AuthProvider>
           <Router>
             <Routes>
-              <Route exact path="/login" element={<LoginPage />} />
-              <Route exact path="/signup" element={<SignupPage />} />
-              <Route exact path="/" element={<MainPage />} />
-              <Route path="*" element={<Forbidden />} />
+              <Route exact path={routes.loginPage()} element={<LoginPage />} />
+              <Route exact path={routes.signupPage()} element={<SignupPage />} />
+              <Route exact path={routes.homePage()} element={<MainPage />} />
+              <Route path={routes.notFoundPage()} element={<Forbidden />} />
             </Routes>
           </Router>
         </AuthProvider>

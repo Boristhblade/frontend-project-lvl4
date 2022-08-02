@@ -12,6 +12,7 @@ import { setChannel } from '../../slices/currentChannelSlice.js';
 import ChatWindow from '../ChatWindow.jsx';
 import Navbar from '../Navbar.jsx';
 import getModal from '../modals/index.js';
+import routes from '../../routes.js';
 
 const renderModal = ({ modalInfo, hideModal }) => {
   if (!modalInfo.type) {
@@ -23,6 +24,7 @@ const renderModal = ({ modalInfo, hideModal }) => {
 };
 
 function MainPage() {
+  const dataPath = routes.data()
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ function MainPage() {
       return;
     }
     auth.logIn();
-    axios.get('/api/v1/data', { headers: header })
+    axios.get(dataPath, { headers: header })
       .then(({ data }) => {
         batch(() => {
           dispatch(setChannel({ id: data.currentChannelId }));
@@ -45,7 +47,7 @@ function MainPage() {
           dispatch(addMessages(data.messages));
         });
       });
-  }, [auth.loggedIn]);
+  }, []);
   return (
     <>
       <div className="h-100">

@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import filter from 'leo-profanity';
 import useAuth from '../../hooks/useAuth.jsx';
-import useSocket from '../../hooks/useSocket.jsx';
+import useAPI from '../../hooks/useAPI.jsx';
 
 export default function MessageForm() {
   filter.loadDictionary('ru');
-  const socket = useSocket();
+  const { sendMessage } = useAPI();
   const inputRef = useRef(null);
   const { username } = useAuth();
   const channelId = useSelector((state) => state.currentChannel.currentChannel);
@@ -20,7 +20,7 @@ export default function MessageForm() {
       body: '',
     },
     onSubmit: (values) => {
-      socket.sendMessage({ username, channelId, body: filter.clean(values.body) });
+      sendMessage({ username, channelId, body: filter.clean(values.body) });
       formik.resetForm();
     },
   });

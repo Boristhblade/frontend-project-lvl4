@@ -55,7 +55,7 @@ function RenameChannel(props) {
       <Modal.Body>
         <Form onSubmit={f.handleSubmit} noValidate>
           <Form.Group>
-            <Form.Label visuallyHidden="true" htmlFor="name">{t('modal.rename')}</Form.Label>
+            <Form.Label visuallyHidden="true" htmlFor="name">{t('channel.name')}</Form.Label>
             <Form.Control
               required
               ref={inputRef}

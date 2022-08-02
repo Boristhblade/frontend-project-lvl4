@@ -26,10 +26,11 @@ export default function ChatAPIProvider({ socket, children }) {
     });
 
     socket.on('removeChannel', ({ id }) => {
+      console.log(`ID::::::::::::${id}`)
       store.dispatch(removeChannel(id));
-      console.log(currentChannel);
+      console.log(`CURR OUTER::::::::::::${currentChannel}`);
       if (id === currentChannel) {
-        console.log(currentChannel);
+        console.log(`CURR INNER::::::::::::${currentChannel}`);
         store.dispatch(setChannel({ id: 1 }));
       }
     });

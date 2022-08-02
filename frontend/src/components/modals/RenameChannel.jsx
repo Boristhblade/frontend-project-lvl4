@@ -1,5 +1,5 @@
 import {
-  Modal, FormGroup, FormControl, Button,
+  Modal, Form, Button,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
@@ -53,9 +53,10 @@ function RenameChannel(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <form onSubmit={f.handleSubmit}>
-          <FormGroup>
-            <FormControl
+        <Form onSubmit={f.handleSubmit} noValidate>
+          <Form.Group>
+            <Form.Label visuallyHidden="true" htmlFor="name">{t('modal.rename')}</Form.Label>
+            <Form.Control
               required
               ref={inputRef}
               onChange={f.handleChange}
@@ -65,10 +66,10 @@ function RenameChannel(props) {
               className="mb-3"
               isInvalid={!!f.errors.name}
             />
-            <FormControl.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid">
               {f.errors.name}
-            </FormControl.Feedback>
-          </FormGroup>
+            </Form.Control.Feedback>
+          </Form.Group>
           <div className="d-flex justify-content-end">
             <Button
               variant="secondary"
@@ -82,7 +83,7 @@ function RenameChannel(props) {
               {t('modal.submit')}
             </Button>
           </div>
-        </form>
+        </Form>
       </Modal.Body>
     </Modal>
   );

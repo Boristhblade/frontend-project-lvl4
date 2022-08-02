@@ -1,5 +1,5 @@
 import {
-  Modal, Button,
+  Modal, Button, Form,
 } from 'react-bootstrap';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,8 @@ function DeleteChannel(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          {/* <Form.Label visuallyHidden="true" htmlFor="name">{t('modal.remove')}</Form.Label> */}
           <div className="d-flex justify-content-end">
             <Button
               variant="secondary"
@@ -40,7 +41,7 @@ function DeleteChannel(props) {
               {t('modal.remove')}
             </Button>
           </div>
-        </form>
+        </Form>
       </Modal.Body>
     </Modal>
   );

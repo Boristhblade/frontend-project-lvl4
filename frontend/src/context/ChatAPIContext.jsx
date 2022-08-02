@@ -18,6 +18,7 @@ export default function ChatAPIProvider({ socket, children }) {
 
     socket.on('newChannel', (payload) => {
       store.dispatch(addChannel(payload));
+      console.log(`CURR OUTER::::::::::::${currentChannel}`);
     });
 
     socket.on('renameChannel', (payload) => {
@@ -34,7 +35,7 @@ export default function ChatAPIProvider({ socket, children }) {
         store.dispatch(setChannel({ id: 1 }));
       }
     });
-  }, [socket, currentChannel]);
+  }, [currentChannel]);
   
 
   const sendMessage = (data) => {

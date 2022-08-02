@@ -60,6 +60,7 @@ function AddChannel(props) {
               onBlur={f.handleBlur}
               value={f.values.name}
               name="name"
+              id="name"
               className="mb-3"
               isInvalid={!!f.errors.name}
             />

@@ -62,6 +62,7 @@ function RenameChannel(props) {
               onChange={f.handleChange}
               onBlur={f.handleBlur}
               value={f.values.name}
+              id="name"
               name="name"
               className="mb-3"
               isInvalid={!!f.errors.name}

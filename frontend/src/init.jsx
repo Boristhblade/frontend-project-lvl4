@@ -7,7 +7,7 @@ import App from './App.jsx';
 import ru from './locales/ru.js';
 
 const rollbarConfig = {
-  accessToken: '530695a665874822bf14cdea7fd4e444',
+  accessToken: process.env.ACCESSTOKEN,
   environment: 'production',
   captureUncaught: true,
   captureUnhandledRejections: true,

@@ -1,18 +1,17 @@
-import React, { createContext, useMemo } from 'react';
+import React, { createContext, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import store from '../slices/index.js';
 import { addMessage } from '../slices/messagesSlice.js';
 import { addChannel, updateChannel, removeChannel } from '../slices/channelsSlice.js';
 import { setChannel } from '../slices/currentChannelSlice.js';
-import { useEffect } from 'react';
 
 const ChatAPIContext = createContext({});
 
 export default function ChatAPIProvider({ socket, children }) {
   const { currentChannel } = useSelector((state) => state.currentChannel);
   useEffect(() => {
-      socket.on('newMessage', (payload) => {
+    socket.on('newMessage', (payload) => {
       store.dispatch(addMessage(payload));
     });
 
@@ -27,7 +26,7 @@ export default function ChatAPIProvider({ socket, children }) {
     });
 
     socket.on('removeChannel', ({ id }) => {
-      console.log(`ID::::::::::::${id}`)
+      console.log(`ID::::::::::::${id}`);
       store.dispatch(removeChannel(id));
       console.log(`CURR OUTER::::::::::::${currentChannel}`);
       if (id === currentChannel) {
@@ -35,8 +34,7 @@ export default function ChatAPIProvider({ socket, children }) {
         store.dispatch(setChannel({ id: 1 }));
       }
     });
-  }, [currentChannel]);
-  
+  }, [socket, currentChannel]);
 
   const sendMessage = (data) => {
     socket.emit('newMessage', data, (response) => {
@@ -77,11 +75,11 @@ export default function ChatAPIProvider({ socket, children }) {
       }
     });
   };
-  const memoizedValue = useMemo(() => ({
+  const value = {
     sendMessage, createChannel, deleteChannel, renameChannel,
-  }));
+  }
   return (
-    <ChatAPIContext.Provider value={memoizedValue}>
+    <ChatAPIContext.Provider value={value}>
       {children}
     </ChatAPIContext.Provider>
   );
@@ -92,7 +90,7 @@ ChatAPIProvider.propTypes = {
   socket: PropTypes.shape({
     on: PropTypes.func.isRequired,
     emit: PropTypes.func.isRequired,
-  }).isRequired
+  }).isRequired,
 };
 
 export { ChatAPIContext };

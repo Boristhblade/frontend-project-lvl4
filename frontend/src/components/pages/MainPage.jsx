@@ -24,7 +24,7 @@ const renderModal = ({ modalInfo, hideModal }) => {
 };
 
 function MainPage() {
-  const dataPath = routes.data()
+  const dataPath = routes.data();
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();

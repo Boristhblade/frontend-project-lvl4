@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import store from '../slices/index.js';
@@ -77,7 +77,7 @@ export default function ChatAPIProvider({ socket, children }) {
   };
   const value = {
     sendMessage, createChannel, deleteChannel, renameChannel,
-  }
+  };
   return (
     <ChatAPIContext.Provider value={value}>
       {children}

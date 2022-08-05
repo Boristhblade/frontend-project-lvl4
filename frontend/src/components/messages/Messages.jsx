@@ -14,7 +14,7 @@ export default function Messages() {
   const currentChannelName = channels.entities[activeChannelId]?.name;
   useEffect(() => {
     scrollRef.current.scrollIntoView();
-  })
+  });
 
   return (
     <div className="col p-0 h-100">
@@ -29,7 +29,7 @@ export default function Messages() {
                 username={messages.entities[id].username}
               />
             ))}
-            <div ref={scrollRef} />
+          <div ref={scrollRef} />
         </div>
         <MessageForm />
       </div>

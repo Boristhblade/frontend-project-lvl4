@@ -2,11 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import useAuth from '../../hooks/useAuth.jsx';
 import useAPI from '../../hooks/useAPI.jsx';
 
 export default function MessageForm() {
+  const { t } = useTranslation();
   const { sendMessage } = useAPI();
   const inputRef = useRef(null);
   const { username } = useAuth();
@@ -29,8 +31,8 @@ export default function MessageForm() {
         <Form.Group className="input-group has-validation" controlId="body">
           <Form.Control
             name="body"
-            aria-label="Новое сообщение"
-            placeholder="Введите сообщение..."
+            aria-label={t('message.new')}
+            placeholder={t('message.enter')}
             className="border-0 p-0 ps-2 form-control"
             value={formik.values.body}
             onChange={formik.handleChange}

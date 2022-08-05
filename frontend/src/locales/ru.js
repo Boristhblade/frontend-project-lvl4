@@ -33,7 +33,7 @@ const ru = {
     chat: 'Hexlet chat',
     signup: {
       required: 'Обязательное поле',
-      passMin: 'Не менее 6 символов',
+      passMin: 'Не менее 6modal символов',
       mustMatch: 'Пароли должны совпадать',
       username: 'Имя пользователя',
       usernameConstraints: 'От 3 до 20 символов',
@@ -64,6 +64,7 @@ const ru = {
     },
     message: {
       new: 'Новое сообщение',
+      enter: 'Введите сообщение...'
     },
   },
 };

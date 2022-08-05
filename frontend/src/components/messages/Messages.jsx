@@ -10,7 +10,7 @@ export default function Messages() {
   const { currentChannel: activeChannelId } = currentChannel;
   const filteredMessages = messages.ids
     .filter((id) => messages.entities[id].channelId === activeChannelId);
-  const currentChannelName = channels.entities[activeChannelId]?.name;
+  const currentChannelName = channels.entities[activeChannelId].name;
   useEffect(() => {
     scrollRef.current.scrollIntoView();
   });

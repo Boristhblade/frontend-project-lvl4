@@ -7,7 +7,6 @@ import useAuth from '../../hooks/useAuth.jsx';
 import useAPI from '../../hooks/useAPI.jsx';
 
 export default function MessageForm() {
-  filter.loadDictionary('ru');
   const { sendMessage } = useAPI();
   const inputRef = useRef(null);
   const { username } = useAuth();

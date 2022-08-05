@@ -28,7 +28,7 @@ const init = async (socket) => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary errorMessage="Error in React render">
         <I18nextProvider i18n={i18n}>
-          <App socket={socket}/>
+          <App socket={socket} />
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>

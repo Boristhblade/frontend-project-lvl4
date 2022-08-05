@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
-import { createContext } from 'react';
 
 const AuthContext = createContext({});
 
@@ -17,7 +16,7 @@ export default function AuthProvider({ children }) {
     if (userId && userId.token) {
       return { Authorization: `Bearer ${userId.token}` };
     }
-  
+
     return {};
   };
   return (

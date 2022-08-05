@@ -44,6 +44,7 @@ export default function ChatAPIProvider({ socket, children }) {
     socket.emit('newChannel', data, (response) => {
       const { status, data: { id } } = response;
       if (status === 'ok') {
+        store.dispatch(addChannel(response.data));
         store.dispatch(setChannel({ id }));
         successCb();
       } else {

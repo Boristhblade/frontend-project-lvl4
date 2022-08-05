@@ -5,7 +5,6 @@ import { useDispatch, batch } from 'react-redux';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import useAuth from '../../hooks/useAuth.jsx';
-import getAuthHeader from '../../utils.js';
 import ModalProvider from '../../context/ModalContext.jsx';
 import { addChannels } from '../../slices/channelsSlice.js';
 import { addMessages } from '../../slices/messagesSlice.js';
@@ -26,6 +25,7 @@ const renderModal = ({ modalInfo, hideModal }) => {
 
 function MainPage() {
   const dataPath = routes.data();
+  const loginPage = routes.loginPage()
   const auth = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,9 +34,9 @@ function MainPage() {
   const showModal = (type, id = null) => setModalInfo({ type, id });
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userId'));
-    const header = getAuthHeader();
+    const header = auth.getAuthHeader();
     if (!userId) {
-      navigate('/login');
+      navigate(loginPage);
       return;
     }
     auth.logIn();
@@ -48,7 +48,7 @@ function MainPage() {
           dispatch(addMessages(data.messages));
         });
       });
-  }, []);
+  }, [auth.loggedIn]);
   return (
     <>
       <div className="h-100">

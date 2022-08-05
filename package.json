@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/Boristhblade/frontend-project-lvl4#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.5",
-    "react-loader-spinner": "^5.1.7-beta.1"
+    "@hexlet/chat-server": "^1.1.5"
   }
 }

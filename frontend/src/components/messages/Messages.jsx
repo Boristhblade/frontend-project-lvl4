@@ -16,7 +16,6 @@ export default function Messages() {
   });
 
   return (
-    <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">
         <MessagesHeader name={currentChannelName} number={filteredMessages.length} />
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
@@ -32,6 +31,5 @@ export default function Messages() {
         </div>
         <MessageForm />
       </div>
-    </div>
   );
 }

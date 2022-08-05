@@ -17,7 +17,6 @@ export default function ChatAPIProvider({ socket, children }) {
 
     socket.on('newChannel', (payload) => {
       store.dispatch(addChannel(payload));
-      console.log(`CURR OUTER::::::::::::${currentChannel}`);
     });
 
     socket.on('renameChannel', (payload) => {
@@ -26,11 +25,8 @@ export default function ChatAPIProvider({ socket, children }) {
     });
 
     socket.on('removeChannel', ({ id }) => {
-      console.log(`ID::::::::::::${id}`);
       store.dispatch(removeChannel(id));
-      console.log(`CURR OUTER::::::::::::${currentChannel}`);
       if (id === currentChannel) {
-        console.log(`CURR INNER::::::::::::${currentChannel}`);
         store.dispatch(setChannel({ id: 1 }));
       }
     });

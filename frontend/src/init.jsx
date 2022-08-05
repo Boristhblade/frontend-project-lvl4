@@ -13,7 +13,7 @@ const rollbarConfig = {
   captureUnhandledRejections: true,
 };
 
-const init = async () => {
+const init = async (socket) => {
   const i18n = createInstance();
   await i18n
     .use(initReactI18next)
@@ -26,7 +26,7 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary errorMessage="Error in React render">
         <I18nextProvider i18n={i18n}>
-          <App />
+          <App socket={socket}/>
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>

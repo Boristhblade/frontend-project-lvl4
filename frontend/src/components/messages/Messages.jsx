@@ -6,11 +6,10 @@ import MessagesHeader from './MessagesHeader.jsx';
 
 export default function Messages() {
   const scrollRef = useRef(null);
-  const messages = useSelector((state) => state.messages);
-  const activeChannelId = useSelector((state) => state.currentChannel.currentChannel);
+  const { messages, channels, currentChannel } = useSelector((state) => state);
+  const { currentChannel: activeChannelId } = currentChannel;
   const filteredMessages = messages.ids
     .filter((id) => messages.entities[id].channelId === activeChannelId);
-  const channels = useSelector((state) => state.channels);
   const currentChannelName = channels.entities[activeChannelId]?.name;
   useEffect(() => {
     scrollRef.current.scrollIntoView();

@@ -8,5 +8,5 @@ export default function LoadingSpinner() {
         <TailSpin color="#999999" height="100" width="100" />
       </div>
     </div>
-  )
+  );
 }

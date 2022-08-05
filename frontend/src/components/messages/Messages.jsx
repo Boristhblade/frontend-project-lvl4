@@ -16,20 +16,20 @@ export default function Messages() {
   });
 
   return (
-      <div className="d-flex flex-column h-100">
-        <MessagesHeader name={currentChannelName} number={filteredMessages.length} />
-        <div id="messages-box" className="chat-messages overflow-auto px-5 ">
-          {filteredMessages
-            .map((id) => (
-              <Message
-                key={id}
-                body={messages.entities[id].body}
-                username={messages.entities[id].username}
-              />
-            ))}
-          <div ref={scrollRef} />
-        </div>
-        <MessageForm />
+    <div className="d-flex flex-column h-100">
+      <MessagesHeader name={currentChannelName} number={filteredMessages.length} />
+      <div id="messages-box" className="chat-messages overflow-auto px-5 ">
+        {filteredMessages
+          .map((id) => (
+            <Message
+              key={id}
+              body={messages.entities[id].body}
+              username={messages.entities[id].username}
+            />
+          ))}
+        <div ref={scrollRef} />
       </div>
+      <MessageForm />
+    </div>
   );
 }

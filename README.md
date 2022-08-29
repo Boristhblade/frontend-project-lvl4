@@ -5,11 +5,11 @@ You can check the app [here](https://evening-bastion-96740.herokuapp.com/)
 
 To run locally:
 
-  npm i -g makefile
-
-  make install
-
-  make start-locally
+ <code> npm i -g makefile </code>
+ 
+ <code> make install </code>
+ 
+ <code> make start-locally </code>
 
 Used packages:
 
